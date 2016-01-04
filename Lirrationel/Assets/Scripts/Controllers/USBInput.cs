@@ -155,10 +155,11 @@ namespace Assets.Scripts
                     var device = port.GetDevice();
 
                     string hubKey = hub.DriverKey;
+                    
                     if(hub.IsRootHub)
                         hubKey = hostCtrl.DriverKeyName;
 
-                    if (_Devices.ContainsKey(device.DeviceDriverKey) && _Hubs.ContainsKey(hubKey))
+                    if (_Devices.ContainsKey(device.DeviceSerialNumber) && _Hubs.ContainsKey(hubKey))
                     {
                         var input = new RawInput();
 
@@ -166,7 +167,7 @@ namespace Assets.Scripts
                         var usbHub = _Hubs[hubKey];
                         var mapping = usbHub.PortMapping[portNumber];
 
-                        input.ElementType = _Devices[device.DeviceDriverKey];
+                        input.ElementType = _Devices[device.DeviceSerialNumber];
                         input.Position = mapping.Position;
                         input.PlayerId = mapping.PlayerId;
 

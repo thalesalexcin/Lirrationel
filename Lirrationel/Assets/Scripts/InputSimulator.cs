@@ -16,27 +16,20 @@ public class InputSimulator : IInputBridge {
 
     public IEnumerable<RawInput> GetRawInputs()
     {
-
         if (Input.GetKeyDown(KeyCode.F1))
-        {
-            if (!_Inputs.Any(i => i.ElementType == EElementType.O_Mushroom))
-                _Inputs.Add(new RawInput { ElementType = EElementType.O_Mushroom, PlayerId = 1, Position = new Vector2(1, 0) });
-            else
-                _Inputs.Remove(_Inputs.Single(i => i.ElementType == EElementType.O_Mushroom));
-        }
+            AddOrDelete(EElementType.O_Mushroom, new Vector2(1,0));
 
         if (Input.GetKeyDown(KeyCode.F2))
-        {
-            if (!_Inputs.Any(i => i.ElementType == EElementType.O_CarnivoreFruit))
-                _Inputs.Add(new RawInput { ElementType = EElementType.O_CarnivoreFruit, PlayerId = 2, Position = new Vector2(1, 0) });
-            else
-                _Inputs.Remove(_Inputs.Single(i => i.ElementType == EElementType.O_CarnivoreFruit));
-        }
+            AddOrDelete(EElementType.O_CarnivoreFruit, new Vector2(1,0));
             
-        //inputs.Add(new RawInput { ElementType = EElementType.S_DesyncSound, PlayerId = 1, Position = new Vector2(0, 0) });
-        
-        //inputs.Add(new RawInput { ElementType = EElementType.O_CarnivoreFruit, PlayerId = 2, Position = new Vector2(1, 0) });
-        //inputs.Add(new RawInput { ElementType = EElementType.D_WaterHell, PlayerId = 2, Position = new Vector2(1, 2) });
         return _Inputs;
+    }
+
+    private void AddOrDelete(EElementType type, Vector2 position)
+    {
+        if (!_Inputs.Any(i => i.ElementType == type))
+            _Inputs.Add(new RawInput { ElementType = type, PlayerId = 1, Position = position });
+        else
+            _Inputs.Remove(_Inputs.Single(i => i.ElementType == type));
     }
 }
