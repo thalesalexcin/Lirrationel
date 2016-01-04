@@ -9,13 +9,14 @@ public class InputSimulator : IInputBridge {
     private List<RawInput> _Inputs;
     private int _Position;
     private float _Distance;
-
+    private bool _ShowDebug;
 
     public InputSimulator()
     {
         _Inputs = new List<RawInput>();
         _Position = 0;
         _Distance = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().DistanceBetweenObjects;
+        _ShowDebug = false;
     }
 
     public IEnumerable<RawInput> GetRawInputs()
@@ -44,6 +45,8 @@ public class InputSimulator : IInputBridge {
         if (Input.GetKeyDown(KeyCode.Alpha2))
             _Position = 1;
 
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+            _ShowDebug = !_ShowDebug;
         return _Inputs;
     }
 
@@ -58,6 +61,7 @@ public class InputSimulator : IInputBridge {
 
     public void OnGUI()
     {
-        GUI.Box(new Rect(Camera.main.WorldToScreenPoint(new Vector2((-_Distance / 2) + _Position * _Distance, 3)), new Vector2(1, 1)), "Position: " + _Position);
+        if(_ShowDebug)
+            GUI.Box(new Rect(Camera.main.WorldToScreenPoint(new Vector2((-_Distance / 2) + _Position * _Distance, 4.5f)), new Vector2(1, 1)), "Position: " + _Position);
     }
 }
