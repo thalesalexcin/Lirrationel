@@ -10,6 +10,7 @@ using System;
 public class GameController : MonoBehaviour {
 
     public float DistanceBetweenObjects;
+    public bool UseKeyboardSimulator;
     private InputController _InputController;
     private Dictionary<EElementType, InputElement> _InputElements;
     private Dictionary<EElementType, GameObject> _Prefabs;
@@ -17,7 +18,7 @@ public class GameController : MonoBehaviour {
 
 	void Start () 
     {
-        _InputController = new InputController();
+        _InputController = new InputController(UseKeyboardSimulator);
         _InputElements = new Dictionary<EElementType, InputElement>();
         _GameElements = new List<GameObject>();
 

@@ -7,10 +7,12 @@ public class InputController {
 
     private IInputBridge _InputBridge;
 
-    public InputController() 
+    public InputController(bool useSimulator) 
     {
-        //_InputBridge = new USBInput();
-        _InputBridge = new InputSimulator();
+        if(useSimulator)
+            _InputBridge = new InputSimulator();
+        else
+            _InputBridge = new USBInput();
 	}
 
     public IEnumerable<RawInput> GetInputs() 
