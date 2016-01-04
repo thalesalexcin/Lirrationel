@@ -176,5 +176,11 @@ namespace Assets.Scripts
                 }
             }
         }
+
+
+        public void OnGUI()
+        {
+            
+        }
     }
 }

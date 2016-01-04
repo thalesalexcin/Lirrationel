@@ -9,6 +9,7 @@ using System;
 
 public class GameController : MonoBehaviour {
 
+    public float DistanceBetweenObjects;
     private InputController _InputController;
     private Dictionary<EElementType, InputElement> _InputElements;
     private Dictionary<EElementType, GameObject> _Prefabs;
@@ -31,8 +32,15 @@ public class GameController : MonoBehaviour {
         _Prefabs.Add(EElementType.O_CarnivoreFruit, (GameObject)Resources.Load("Prefabs/CarnivoreFruit"));
         _Prefabs.Add(EElementType.O_WoolBall, (GameObject)Resources.Load("Prefabs/WoolBall"));
         _Prefabs.Add(EElementType.F_MushroomJose, (GameObject)Resources.Load("Prefabs/MushroomJose"));
+        _Prefabs.Add(EElementType.D_WaterHell, (GameObject)Resources.Load("Prefabs/WaterHell"));
+        _Prefabs.Add(EElementType.S_DesyncSound, (GameObject)Resources.Load("Prefabs/DesyncSound"));
     }
-	
+
+    void OnGUI()
+    {
+        _InputController.OnGUI();
+    }
+
 	void Update() 
     {
         var inputs = _InputController.GetInputs();
@@ -62,7 +70,7 @@ public class GameController : MonoBehaviour {
                 {
                     _InputElements[firstElementType].Fusioned = true;
                     _InputElements[secondElementType].Fusioned = true;
-                    var fusionObject = _CreateElement(fusionType);
+                    var fusionObject = _CreateElement(fusionType, objectElement.ControlPosition);
                     fusionObject.GetComponent<FusionElement>().FirstFusionElement = firstElementType;
                     fusionObject.GetComponent<FusionElement>().SecondFusionElement = secondElementType;
                     _RemoveElement(firstElementType);
@@ -89,7 +97,7 @@ public class GameController : MonoBehaviour {
                 _InputElements.Add(input.ElementType, inputElement);
 
                 if (_Prefabs.ContainsKey(input.ElementType))
-                    _CreateElement(input.ElementType);
+                    _CreateElement(input.ElementType, input.Position);
             }
 
             _InputElements[input.ElementType].Unplugged = false;
@@ -122,21 +130,25 @@ public class GameController : MonoBehaviour {
             var fusionElement = fusionToDefuse.GetComponent<FusionElement>();
             _RemoveElement(fusionElement.ElementType);
             if (fusionElement.FirstFusionElement == unplugged)
-                _CreateElement(fusionElement.SecondFusionElement);
+                _CreateElement(fusionElement.SecondFusionElement, fusionElement.ControlPosition);
             else
-                _CreateElement(fusionElement.FirstFusionElement);
+                _CreateElement(fusionElement.FirstFusionElement, fusionElement.ControlPosition);
 
             _InputElements[fusionElement.FirstFusionElement].Fusioned = false;
             _InputElements[fusionElement.SecondFusionElement].Fusioned = false;
         }
     }
 
-    private GameObject _CreateElement(EElementType elementType)
+    private GameObject _CreateElement(EElementType elementType, Vector2 controlPosition)
     {
         var element = Instantiate(_Prefabs[elementType]);
         element.transform.parent = this.transform;
-        element.transform.position = Vector2.zero;
+
+        if (element.GetComponent<ObjectElement>() != null)
+            element.transform.position = new Vector2(-(DistanceBetweenObjects / 2) + (controlPosition.x * DistanceBetweenObjects), element.transform.position.y);
+        
         element.GetComponent<GameElement>().ElementType = elementType;
+        element.GetComponent<GameElement>().ControlPosition = controlPosition;
         _GameElements.Add(element);
         return element;
     }

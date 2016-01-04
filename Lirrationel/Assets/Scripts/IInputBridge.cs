@@ -11,4 +11,5 @@ public interface IInputBridge {
     /// <returns></returns>
     IEnumerable<RawInput> GetRawInputs();
 
+    void OnGUI();
 }
