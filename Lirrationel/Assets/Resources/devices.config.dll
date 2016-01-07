@@ -1,17 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
   <Devices>
-    <Add Key="AADY98H15KSCH2BI" Value="O_CarnivoreFruit"/>
-    <Add Key="08764118EDC285D3" Value="O_Mushroom"/>
-    <Add Key="I7CECMEQT4WOPJH6" Value="O_WoolBall"/>
-    <!--<Add Key="I7CECMEQT4WOPJH6" Value="O_DominoSpider"/>-->
+    <!-- Clef Alex -->
+    <Add Key="AANC0M8PML60UCMH" Value="O_CarnivoreFruit"/>
+	<!-- Clef Paul -->
+    <Add Key="000000000000AA220791006B" Value="O_Mushroom"/>
+	<!-- Clef Iphone -->
+    <Add Key="07480B912165" Value="O_WoolBall"/>
+	<!-- Clef Florian -->
+    <Add Key="070A57B3262BEC73" Value="O_DominoSpider"/>
+	<!-- Clef Juliette -->
+	<Add Key="4C532000071219113573" Value="D_WaterHell"/>
+	
   </Devices>
   <Hubs>
-    <Hub Key="{36fc9e60-c465-11cf-8056-444553540000}\0000" Player="1">
+    <Hub Key="{36fc9e60-c465-11cf-8056-444553540000}\0014" Player="1">
       <Position X="1" Y="0" PortNumber="1"/>
+	  <Position X="2" Y="0" PortNumber="2"/>
+	  <Position X="3" Y="0" PortNumber="3"/>
+	  
     </Hub>
-    <Hub Key="{36fc9e60-c465-11cf-8056-444553540000}\0000" Player="2">
-      <Position X="1" Y="0" PortNumber="2"/>
+    <Hub Key="{36fc9e60-c465-11cf-8056-444553540000}\0020" Player="2">
+      <Position X="1" Y="0" PortNumber="1"/>
+	  <Position X="2" Y="0" PortNumber="2"/>
+	  <Position X="3" Y="0" PortNumber="3"/>
+	  
     </Hub>
     <!--<Hub Key="{36fc9e60-c465-11cf-8056-444553540000}\0013" Player="1">
       <Position X="1" Y="0" PortNumber="1"/>

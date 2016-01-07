@@ -39,7 +39,8 @@ public class GameController : MonoBehaviour {
 
     void OnGUI()
     {
-        _InputController.OnGUI();
+        if(_InputController != null)
+            _InputController.OnGUI();
     }
 
 	void Update() 

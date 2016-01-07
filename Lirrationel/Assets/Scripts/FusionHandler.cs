@@ -15,6 +15,7 @@ namespace Assets.Scripts
         {
             _FusionTable = new Dictionary<KeyValuePair<EElementType, EElementType>, EElementType>();
             _FusionTable.Add(new KeyValuePair<EElementType, EElementType>(EElementType.O_CarnivoreFruit, EElementType.O_Mushroom), EElementType.F_MushroomJose);
+            _FusionTable.Add(new KeyValuePair<EElementType, EElementType>(EElementType.O_Mushroom,EElementType.O_CarnivoreFruit), EElementType.F_MushroomJose);
         }
 
 
